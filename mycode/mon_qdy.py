@@ -5,6 +5,7 @@ from email.mime.text import MIMEText
 from email.header import Header
 
 config=configparser.ConfigParser()
+
 config.read("config.ini")
 mon_url = config.get("mon_url", "qdy_url")
 mail_host = config.get("mailinfo","m_host")
@@ -17,10 +18,11 @@ message = MIMEText(mon_url, 'plain', 'utf-8')
 #message['To'] = Header("测试", 'utf-8')
 subject = 'sys_info'
 
+
 try:
     #smtpObj = smtplib.SMTP(mail_host)
-    print ("this is "+ mail_host)
-    smtpObj=smtplib.SMTP(mail_host,25)
+
+    smtpObj=smtplib.SMTP("smtp.163.com")
     smtpObj.set_debuglevel(1)
     smtpObj.login(mail_sender,mail_pass)
     smtpObj.sendmail(mail_sender, mail_receiver, message.as_string())
