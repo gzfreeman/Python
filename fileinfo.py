@@ -1,4 +1,6 @@
-# Script Name       : fileinfo.py
+
+from __future__ import print_function
+import os# Script Name       : fileinfo.py
 # Author                : Not sure where I got this from
 # Created               : 28th November 2011
 # Last Modified     :
@@ -10,8 +12,6 @@
 
 # get file information using os.stat()
 # tested with Python24 vegsaeat 25sep2006
-from __future__ import print_function
-import os
 import sys
 import stat   # index constants for os.stat()
 import time
