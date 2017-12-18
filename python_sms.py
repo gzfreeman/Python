@@ -7,9 +7,8 @@
 # Modifications	: 
 
 # Description	: This will text all the students Karate Club
-
-import urllib      # URL functions
-import urllib2     # URL functions
+   # URL functions
+import urllib
 import os
 from time import strftime
 import sqlite3
@@ -61,16 +60,17 @@ while True:
   url = 'http://www.txtlocal.com/sendsmspost.php'
 
   postdata = urllib.urlencode(values)
-  req = urllib2.Request(url, postdata)
+  req = urllib.Request(url, postdata)
 
   print ('Attempting to send SMS to '+ sname + ' at ' + snumber + ' on ' + tdate)
   f.write ('Attempting to send SMS to '+ sname + ' at ' + snumber + ' on ' + tdate + '\n')
 
   try:
-    response = urllib2.urlopen(req)
+    response = urllib.urlopen(req)
     response_url = response.geturl()
     if response_url == url:
-      print 'SMS sent!'
-  except urllib2.URLError, e:
-    print 'Send failed!'
-    print e.reason
+      print ('SMS sent!')
+  except urllib.URLError as e:
+
+    print ('Send failed!')
+    print (e.reason)

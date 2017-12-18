@@ -5,11 +5,20 @@
 # Description	: Check a file exists and that we can read the file
 from os import rename, chdir, makedirs,path,walk
 from os.path import exists, pardir
+import platform
+
+
+def isWindowsSystem():
+    return 'Windows' in platform.system()
+
+
+def isLinuxSystem():
+    return 'Linux' in platform.system()
 
 ##创建目录
 def create_directory(name):
     if exists(pardir+"\\"+name):
-        print('Folder already exists... Cannot Overwrite this')
+        print('目录已存在')
     else:
         from os import makedirs
         makedirs(pardir+"\\"+name)
@@ -45,22 +54,28 @@ def move_folder(filename, name_dir, folder):
     from shutil import move
     move(filename, name_dir+":\\"+folder+'\\')
 
-##文件目录大小
-def folder_size (folder_path):
-    dir_size = 0  # Set the size to 0
-    fsizedicr = {'Bytes': 1,
-                 'Kilobytes': float(1) / 1024,
-                 'Megabytes': float(1) / (1024 * 1024),
-                 'Gigabytes': float(1) / (1024 * 1024 * 1024)}
-    for (path, dirs, files) in walk(folder_path):
-        for file in files:
-            filename = path.join(path, file)
-            dir_size += path.getsize(filename)
+#文件目录大小
 
-    fsizeList = [str(round(fsizedicr[key] * dir_size, 2)) + " " + key for key in fsizedicr]  # List of units
+def GetPathSize(strPath):
+    if not path.exists(strPath):
+        return 0;
 
-    if dir_size == 0:
-        print("File Empty")
-    else:
-        for units in sorted(fsizeList)[::-1]:
-            print("Folder Size: " + units)
+    if path.isfile(strPath):
+        return path.getsize(strPath);
+
+    nTotalSize = 0;
+    for strRoot, lsDir, lsFiles in walk(strPath):
+        # get child directory size
+        for strDir in lsDir:
+            nTotalSize = nTotalSize + GetPathSize(path.join(strRoot, strDir));
+
+            # for child file size
+        for strFile in lsFiles:
+            nTotalSize = nTotalSize + path.getsize(path.join(strRoot, strFile));
+
+    print (nTotalSize);
+
+
+def write_to_file(filename, txt):
+  with open(filename, 'w') as file_object:
+      s = file_object.write(txt)

@@ -1,5 +1,5 @@
-from mycode.pub_util import folder_size
+from mycode.pub_util import GetPathSize
 
-folder_size("F:\\jikefile")
+GetPathSize("F:\\jikefile")
 
 
