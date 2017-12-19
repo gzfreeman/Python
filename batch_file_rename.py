@@ -13,11 +13,7 @@ import os
 import argparse
 
 def batch_rename(work_dir, old_ext, new_ext):
-    '''
-    This will batch rename a group of files in a given directory,
-    once you pass the current and new extensions
-    '''
-    # files = os.listdir(work_dir)
+
     for filename in os.listdir(work_dir):
         # Get the file extension
         split_file = os.path.splitext(filename)

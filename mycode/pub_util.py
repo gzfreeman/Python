@@ -3,7 +3,7 @@
 
 ##文件类
 # Description	: Check a file exists and that we can read the file
-from os import rename, chdir, makedirs,path,walk
+from os import rename, chdir, makedirs,path,walk,listdir
 from os.path import exists, pardir
 import platform
 
@@ -55,7 +55,6 @@ def move_folder(filename, name_dir, folder):
     move(filename, name_dir+":\\"+folder+'\\')
 
 #文件目录大小
-
 def GetPathSize(strPath):
     if not path.exists(strPath):
         return 0;
@@ -75,7 +74,20 @@ def GetPathSize(strPath):
 
     print (nTotalSize);
 
-
+##将内容写入文件
 def write_to_file(filename, txt):
   with open(filename, 'w') as file_object:
       s = file_object.write(txt)
+
+##合并文件
+def merge(resultfile):
+    """merge csv files to one file"""
+    # use list save the csv files
+    csvfiles = [f for f in listdir('.') if f != resultfile and f.split('.')[1]=='csv']
+    with open(resultfile,'w') as writefile:
+        for csvfile in csvfiles:
+            with open(csvfile) as readfile:
+                print('File {} readed.'.format(csvfile))
+                # do the read and write
+                writefile.write(readfile.read()+'\n')
+    print('\nFile {} wrote.'.format(resultfile))
