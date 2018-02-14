@@ -16,27 +16,12 @@ _tomcatFile = "tomcat-7"  # tomcat文件名
 
 def firewall():
     """
-    开启防火墙服务firewalld,开放内网8080, 8081, 8082,外网80, 443端口
+    关闭防火墙服务firewalld
     """
-    print("------开启防火墙firewalld------")
-    os.system("systemctl enable firewalld")
-    os.system("systemctl start firewalld")
-    print("指定eth0 zone=internal")
-    os.system("firewall-cmd --permanent --zone=internal --change-interface=eth0")
-    os.system("firewall-cmd --reload")
-    print("开放外网端口80, 443, 8888")
-    os.system("firewall-cmd --zone=public --add-port=80/tcp --permanent")
-    os.system("firewall-cmd --zone=public --add-port=443/tcp --permanent")
-    os.system("firewall-cmd --zone=public --add-port=8888/tcp --permanent")
-    print("开放内网端口8080, 8081, 8082, 8888")
-    os.system("firewall-cmd --zone=internal --add-port=8080/tcp --permanent")
-    os.system("firewall-cmd --zone=internal --add-port=8081/tcp --permanent")
-    os.system("firewall-cmd --zone=internal --add-port=8082/tcp --permanent")
-    os.system("firewall-cmd --zone=internal --add-port=8888/tcp --permanent")
-    os.system("firewall-cmd --reload")
-    print("当前开放端口结果:")
-    os.system("firewall-cmd --list -ports")
-    os.system("firewall-cmd --list -ports --zone=internal")
+    print("------关闭防火墙firewalld------")
+    os.system("systemctl disable firewalld")
+    os.system("systemctl stop firewalld")
+
 
 
 def jdk():

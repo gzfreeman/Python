@@ -1,5 +1,5 @@
 # batch_file_rename.py
-# Created: 6th August 2012
+# 批量修改文件名
 
 '''
 This will batch rename a group of files in a given directory,

@@ -20,11 +20,11 @@ login_url = 'http://112.94.22.222:5050/newzentao/www/index.php?m=user&f=login'
 session = requests.Session()
 
 resp = session.post(login_url, data)
-
+session_data = print(session)
 #登录后才能访问的网页
 url = 'http://112.94.22.222:5050/newzentao/www/index.php?m=my&f=index'
 
 #发送访问请求
 resp = session.get(url)
 
-print(resp.content.decode('utf-8'))
+#print(resp.content.decode('utf-8'))

@@ -1,3 +1,4 @@
+##随机生成密码
 from random import choice
 import string
 
