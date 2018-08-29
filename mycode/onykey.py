@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
-
-# 服务器一键安装配置脚本,请使用root账号执行本脚本
-
+#要使用subprocess
 import os,stat
+import configparser
 import shutil
 import tarfile
 import xml.etree.ElementTree as ET
 
+<<<<<<< Updated upstream
 _baseDir = "/usr/local"
 _jdkTarFile = "server-jre-8u111-linux-x64.tar.gz"  # jdk安装文件名
 _jdkDir = _baseDir + "/jdk1.8"  # jdk安装路径
@@ -163,6 +163,121 @@ def mkappdir():
     os.chmod("/webserver",stat.S_IWGRP)
     os.system("chown -R oper:oper /webserver/updatefile")
     return
+=======
+#定义和读取各种变量
+config=configparser.ConfigParser()
+config.read("tomcat.ini")
+monurl = config.get("tomcatinfo", "baseDir")
+print (monurl)
+
+
+# def tomcat(index, enable_redis_session=False):
+#     """安装tomcat,配置端口,安装为系统服务.
+#     :param index: tomcat索引,即第几个.如:index=1,则安装的目录为tomcat-7-1,服务名为tomcat1.
+#     :param enable_redis_session: 是否配置用redis存储tomcat session.默认不安装
+#     :return: 无
+#     """
+#
+#     print("------安装tomcat " + index + "------")
+#     target = _baseDir + "/tomcat-7"
+#     if index > 0:
+#         target = target + "-" + index
+#     print("复制文件到" + target)
+#     #shutil.copytree(_tomcatFile, target)
+#     #bin_path = target + "/bin/"
+#     #print("设置PID文件")
+#     #pid_path_config = "CATALINA_PID=\"" + target + "/tomcat.pid\""
+#     fileappend(bin_path + "setenv.sh", pid_path_config)
+#
+#     # 修改端口
+#     if index > 0:
+#         print("配置端口")
+#         server_file = target + "/conf/server.xml"
+#         server_xml = ET.parse(server_file)
+#
+#         node_server = server_xml.getroot()
+#         old_port = node_server.attrib["port"]
+#         node_server.set("port", str(int(old_port) + index))
+#
+#         node_connector = node_server.find("./Service/Connector")
+#         old_port = node_connector.attrib["port"]
+#         node_connector.set("port", str(int(old_port) + index))
+#
+#         old_port = node_connector.attrib["redirectPort"]
+#         node_connector.set("redirectPort", str(int(old_port) + index))
+#         server_xml.write(server_file)
+#
+#     '''
+#      集群环境,配置redssion存储tomcat session
+#      配置redis redisson.conf文件
+#      修改conf/context.xml,加内容<Manager className="org.redisson.tomcat.RedissonSessionManager" configPath="/etc/redisson.conf" />
+#     '''
+#     if enable_redis_session:
+#         print("配置redis session")
+#         shutil.copy("redisson.conf", "/etc/redisson.conf")
+#         context_file = target + "/conf/context.xml"
+#         context_xml = ET.parse(context_file)
+#         ele = ET.Element("Manager")
+#         ele.attrib = {"className": "org.redisson.tomcat.RedissonSessionManager", "configPath": "/etc/redisson.conf"}
+#         root = context_xml.getroot()
+#         root.append(ele)
+#         context_xml.write(context_file)
+#
+#     service_name = "tomcat" + index
+#     print("设置为系统服务" + service_name)
+#     service_config_text = "[Unit]" \
+#                           "\nDescription=" + service_name \
+#                           + "\nAfter=syslog.target network.target remote-fs.target nss-lookup.target" \
+#                             "\n[Service]" \
+#                             "\nType=forking" \
+#                             "\nPIDFile=" + pid_path_config \
+#                           + "\nExecStart=" + bin_path \
+#                           + "startup.sh" \
+#                             "\nExecReload=/bin/kill -s HUP $MAINPID" \
+#                             "\nExecStop=" + bin_path \
+#                           + "shutdown.sh\nPrivateTmp=true\n\n[Install]\nWantedBy=multi-user.target"
+#     with open("/usr/lib/systemd/system/" + service_name + ".service", "a") as service_file:
+#         service_file.write(service_config_text)
+#     os.system("systemctl enable " + service_name)
+#     os.system("chown -R tomcat:tomcat " + target)
+#     print(service_name + "安装完成")
+#     return
+
+    # def tomcat():
+    #     print("------安装tomcat " + index + "------")
+    #     target = _baseDir + "/tomcat-7"
+    #     if index > 0:
+    #         target = target + "-" + index
+    #     print("复制文件到" + target)
+    #     # shutil.copytree(_tomcatFile, target)
+    #     # bin_path = target + "/bin/"
+    #     # print("设置PID文件")
+    #     # pid_path_config = "CATALINA_PID=\"" + target + "/tomcat.pid\""
+    #     fileappend(bin_path + "setenv.sh", pid_path_config)
+    #
+    #     # 修改端口，修改服务端口和connect端口
+    #     if index > 0:
+    #         print("配置端口")
+    #         server_file = target + "/conf/server.xml"
+    #         server_xml = ET.parse(server_file)
+    #
+    #         node_server = server_xml.getroot()
+    #         old_port = node_server.attrib["port"]
+    #         node_server.set("port", str(int(old_port) + index))
+    #
+    #         node_connector = node_server.find("./Service/Connector")
+    #         old_port = node_connector.attrib["port"]
+    #         node_connector.set("port", str(int(old_port) + index))
+    #
+    #         old_port = node_connector.attrib["redirectPort"]
+    #         node_connector.set("redirectPort", str(int(old_port) + index))
+    #         server_xml.write(server_file)
+
+
+##删除tomcat内置的示例目录,安装完后需要删除以上
+  # def rmwebapps():
+  #    pass
+>>>>>>> Stashed changes
 
 
 def fileappend(file_path, text):
@@ -181,9 +296,4 @@ def filesearch(file_path, search_text):
     return is_exist
 
 
-firewall()
-jdk()
-mkappdir()
-tomcat(0)
-tomcat(1)
-tomcat(2)
+#tomcat()
