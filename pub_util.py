@@ -6,6 +6,8 @@
 from os import rename, chdir, makedirs,path,walk,listdir
 from os.path import exists, pardir
 import platform
+from random import choice
+import string
 
 
 def isWindowsSystem():
@@ -91,3 +93,7 @@ def merge(resultfile):
                 # do the read and write
                 writefile.write(readfile.read()+'\n')
     print('\nFile {} wrote.'.format(resultfile))
+
+##随机生成密码
+def GenPassword(length=8,chars=string.ascii_letters+string.digits):
+    return ''.join([choice(chars) for i in range(length)])
