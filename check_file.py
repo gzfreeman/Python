@@ -1,7 +1,6 @@
 # Script Name		: check_file.py
 
 
-
 # Modifications	: with statement added to ensure correct file closure
 
 # Description	: Check a file exists and that we can read the file
