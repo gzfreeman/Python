@@ -17,7 +17,7 @@ def isWindowsSystem():
 def isLinuxSystem():
     return 'Linux' in platform.system()
 
-##创建目录
+# 创建目录
 def create_directory(name):
     if exists(pardir+"\\"+name):
         print('目录已存在')
@@ -56,19 +56,19 @@ def move_folder(filename, name_dir, folder):
     from shutil import move
     move(filename, name_dir+":\\"+folder+'\\')
 
-#文件目录大小
-def GetPathSize(strPath):
-    if not path.exists(strPath):
+# 文件目录大小
+def getpathsize(strpath):
+    if not path.exists(strpath):
         return 0;
 
-    if path.isfile(strPath):
-        return path.getsize(strPath);
+    if path.isfile(strpath):
+        return path.getsize(strpath);
 
     nTotalSize = 0;
-    for strRoot, lsDir, lsFiles in walk(strPath):
+    for strRoot, lsDir, lsFiles in walk(strpath):
         # get child directory size
         for strDir in lsDir:
-            nTotalSize = nTotalSize + GetPathSize(path.join(strRoot, strDir));
+            nTotalSize = nTotalSize + getpathsize(path.join(strRoot, strDir));
 
             # for child file size
         for strFile in lsFiles:
