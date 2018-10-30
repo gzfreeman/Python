@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-from PropertiesUtil import prop
+from .PropertiesUtil import prop
 from DBUtils.PooledDB import PooledDB
 import importlib
-import cx_Oracle
+# import cx_Oracle
 
 
 class DbPoolUtil(object):

@@ -8,6 +8,8 @@ from os.path import exists, pardir
 import platform
 from random import choice
 import string
+import socket
+from urllib.request import urlopen
 
 
 def isWindowsSystem():
@@ -97,3 +99,12 @@ def merge(resultfile):
 ##随机生成密码
 def GenPassword(length=8,chars=string.ascii_letters+string.digits):
     return ''.join([choice(chars) for i in range(length)])
+
+# 获取IP
+def public_ip():
+    read_res = urlopen('http://ipecho.net/plain').read()
+    return read_res.decode('utf-8')
+
+
+def local_ip():
+    return socket.gethostbyname(socket.gethostname())
