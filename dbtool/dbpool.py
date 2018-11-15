@@ -3,7 +3,7 @@
 from .PropertiesUtil import prop
 from DBUtils.PooledDB import PooledDB
 import importlib
-# import cx_Oracle
+import cx_Oracle
 
 
 class DbPoolUtil(object):
@@ -12,14 +12,14 @@ class DbPoolUtil(object):
         self.__db_type = properties_dic['dbtype']
         if self.__db_type == "mysql":
             config = {
-                #'host': properties_dic['dbip'],
-                #'port': int(properties_dic['dbport']),
-                #'db': properties_dic['database'],
-                #'user': properties_dic['username'],
-                #'password': properties_dic['password'],
-                #'charset': "utf8"
+                'host': properties_dic['dbip'],
+                'port': int(properties_dic['dbport']),
+                'db': properties_dic['database'],
+                'user': properties_dic['username'],
+                'password': properties_dic['password'],
+                'charset': "utf8"
             }
-            db_creator = importlib.import_module("cx_Oracle")
+            db_creator = importlib.import_module("pymysql")
             self.__pool = PooledDB(db_creator, maxcached=50, maxconnections=200, maxusage=200, **config)
         elif self.__db_type == "oracle":
             config = {

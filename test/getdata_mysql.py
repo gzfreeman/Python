@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import dbpool
+
 import os
 
 

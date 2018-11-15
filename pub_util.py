@@ -97,7 +97,7 @@ def merge(resultfile):
     print('\nFile {} wrote.'.format(resultfile))
 
 ##随机生成密码
-def GenPassword(length=8,chars=string.ascii_letters+string.digits):
+def GenPassword(length,chars=string.ascii_letters+string.digits):
     return ''.join([choice(chars) for i in range(length)])
 
 # 获取IP
@@ -108,3 +108,5 @@ def public_ip():
 
 def local_ip():
     return socket.gethostbyname(socket.gethostname())
+
+
