@@ -3,11 +3,12 @@
 from .PropertiesUtil import prop
 from DBUtils.PooledDB import PooledDB
 import importlib
-import cx_Oracle
+import os
 
 
 class DbPoolUtil(object):
-    def __init__(self, config_file='db.properties'):
+    print("aaa"+os.getcwd())
+    def __init__(self, config_file='../conf/db.properties'):
         properties_dic = prop.get_config_dict(config_file)
         self.__db_type = properties_dic['dbtype']
         if self.__db_type == "mysql":
