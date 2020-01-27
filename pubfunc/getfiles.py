@@ -20,8 +20,7 @@ pattern = '20191126' + '.txt'
 for i, element in enumerate(filelist):
     ##未能完成匹配对应规则
     if element.re.search('20191127*_OrderCenter_YZS_GD.txt') != -1:
-
-        #从远程下载匹配的格式
+        pass
         #sftp.get(filelist[i],"d:/mycode/python/yzs/"+filelist[i])
         #filelist[i].pre
         #print("yes")

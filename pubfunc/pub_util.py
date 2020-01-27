@@ -5,6 +5,7 @@
 # Description	: Check a file exists and that we can read the file
 from os import rename, chdir, makedirs,path,walk,listdir
 from os.path import exists, pardir
+
 import platform
 from random import choice
 import string
@@ -112,20 +113,20 @@ def local_ip():
 
 #批量修改文件名，用随机密码作为文件名
 def batch_rename_prefix(work_dir):
-      for filename in os.listdir(work_dir):
+      for filename in listdir(work_dir):
         # 获取文件主文件名
-        split_file = os.path.splitext(filename)
+        split_file = path.splitext(filename)
         #file_pf = split_file[0]
         #if old_pf == file_pf:
 
         newfile = GenPassword(5) + split_file[1]
-        os.rename(os.path.join(work_dir, filename),os.path.join(work_dir, newfile))
+        rename(path.join(work_dir, filename),path.join(work_dir, newfile))
 
 
 
 
 ##base64解码
-def  decodeBase64(b_str)
+def  decodeBase64(b_str):
     check1=base64.b64decode(b_str)
     check1=str(check1,'utf8')
     check2=check1.split(",")
