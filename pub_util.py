@@ -9,6 +9,7 @@ import platform
 from random import choice
 import string
 import socket
+import base64
 from urllib.request import urlopen
 
 
@@ -109,4 +110,23 @@ def public_ip():
 def local_ip():
     return socket.gethostbyname(socket.gethostname())
 
+#批量修改文件名，用随机密码作为文件名
+def batch_rename_prefix(work_dir):
+      for filename in os.listdir(work_dir):
+        # 获取文件主文件名
+        split_file = os.path.splitext(filename)
+        #file_pf = split_file[0]
+        #if old_pf == file_pf:
 
+        newfile = GenPassword(5) + split_file[1]
+        os.rename(os.path.join(work_dir, filename),os.path.join(work_dir, newfile))
+
+
+
+
+##base64解码
+def  decodeBase64(b_str)
+    check1=base64.b64decode(b_str)
+    check1=str(check1,'utf8')
+    check2=check1.split(",")
+    return check2
